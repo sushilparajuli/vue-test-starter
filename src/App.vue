@@ -1,11 +1,13 @@
 <template>
-  <div id="app"></div>
+<item-list />
 </template>
 
 <script>
 export default {
   name: "App",
-  components: {}
+  components: {
+    ItemList
+  }
 };
 </script>
 
