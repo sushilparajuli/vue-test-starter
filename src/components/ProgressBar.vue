@@ -1,7 +1,7 @@
 <template>
     <div
     class="progress" 
-    :class="hidden ? 'hidden': ''"
+    :class='{hidden: hidden}'
     :style="{'width': `${percent}%`}"
      />
 </template>
@@ -18,10 +18,14 @@ export default {
         start () {
             this.hidden = false
             this.percent = 0
+            this.timer = setInterval(()=>{
+                this.percent++
+            },100)
         },
         finish () {
             this.percent = 100
             this.hidden = true
+            clearInterval(this.timer)
         }
     }
 
