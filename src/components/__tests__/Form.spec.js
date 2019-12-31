@@ -16,7 +16,22 @@ describe('Form.vue', () => {
         wrapper.find("button").trigger('submit')
         const url = 'http://demo7437963.mockable.io/validate'
         const expectedData = expect.objectContaining({
-            email : 'email@gmail.com'
+            email: 'email@gmail.com'
+        })
+        expect(axios.post).toHaveBeenCalledWith(url, expectedData)
+    })
+
+    test('sends post request with enterCompetition checkbox value  on submit', () => {
+        const axios = {
+            post: jest.fn()
+        }
+        const wrapper = shallowMount(Form, { mocks: { axios } })
+        const input = wrapper.find("input[value='no']")
+        input.setChecked()
+        wrapper.find("button").trigger('submit')
+        const url = 'http://demo7437963.mockable.io/validate'
+        const expectedData = expect.objectContaining({
+            enterCompetition : false
         })
         expect(axios.post).toHaveBeenCalledWith(url, expectedData)
     })
