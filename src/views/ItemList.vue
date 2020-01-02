@@ -1,7 +1,7 @@
 <template>
     <div class="item-list">
         <item 
-        v-for="item in displayItems" 
+        v-for="item in $store.getters.displayItems" 
         :item='item' 
         :key='item.id' />
     </div>
@@ -14,11 +14,6 @@ import { fetchListData } from '../api/api'
 
 
 export default {
-  data () {
-    return {
-        displayItems: []
-    }
-  },
    beforeMount () {
     this.loadItems()
   },
@@ -28,7 +23,7 @@ export default {
   methods: {
     loadItems () {
       this.$bar.start()
-      fetchListData('top')
+      this.$store.dispatch( 'fetchListData', {type: 'top'})
         .then(items => {
           this.displayItems = items
           this.$bar.finish()
