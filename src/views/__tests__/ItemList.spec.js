@@ -64,9 +64,9 @@ describe('ItemList.vue', () => {
         expect.assertions(1)
         const $bar = {
             start: () => {},
-            finish: jest.fn()
+            fail: jest.fn()
         }
-        fetchListData.mockRejectedValueOnce();
+        fetchListData.mockImplementationOnce(() => Promise.reject())
         shallowMount(ItemList, { mocks: { $bar } })
         await flushPromises();
         expect($bar.fail).toHaveBeenCalled()
